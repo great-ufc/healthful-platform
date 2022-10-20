@@ -305,6 +305,9 @@ function performCustomOperations(){
         jQuery(document).on('click', function(e) {
             let myTargetElement = e.target;
             let selector, mainElement;
+
+            
+
             if (jQuery(myTargetElement).hasClass('search-toggle') || jQuery(myTargetElement).parent().hasClass('search-toggle') || jQuery(myTargetElement).parent().parent().hasClass('search-toggle')) {
                 if (jQuery(myTargetElement).hasClass('search-toggle')) {
                     selector = jQuery(myTargetElement).parent();
@@ -321,14 +324,17 @@ function performCustomOperations(){
                     jQuery('.navbar-list li .search-toggle').removeClass('active');
                 }
 
-                selector.toggleClass('iq-show');
-                mainElement.toggleClass('active');
+                // Bad smell: toggleClass not working
+                selector.addClass('iq-show');
+                mainElement.addClass('active');
 
                 e.preventDefault();
             } else if (jQuery(myTargetElement).is('.search-input')) {} else {
                 jQuery('.navbar-list li').removeClass('iq-show');
                 jQuery('.navbar-list li .search-toggle').removeClass('active');
             }
+
+            
         });
 
 
@@ -606,6 +612,70 @@ function performCustomOperations(){
                     jQuery(this).addClass('active-task');
                 }
             });
+        });
+
+        var current_fs, next_fs, previous_fs; //fieldsets
+        var opacity;
+        var current = 1;
+        var steps = jQuery("fieldset").length;
+
+        setProgressBar(current);
+
+        $(".next").click(function() {
+
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next();
+
+
+            jQuery("#top-tabbar-vertical li").eq(jQuery("fieldset").index(next_fs)).addClass("active");
+
+
+            next_fs.show();
+            current_fs.animate({
+                opacity: 0
+            }, {
+                step: function(now) {
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+                    next_fs.css({
+                        'opacity': opacity
+                    });
+                },
+                duration: 500
+            });
+            setProgressBar(++current);
+        });
+
+        jQuery(".previous").click(function() {
+
+            current_fs = $(this).parent();
+            previous_fs = $(this).parent().prev();
+
+            jQuery("#top-tabbar-vertical li").eq(jQuery("fieldset").index(current_fs)).removeClass("active");
+
+            previous_fs.show();
+
+            current_fs.animate({
+                opacity: 0
+            }, {
+                step: function(now) {
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+                    previous_fs.css({
+                        'opacity': opacity
+                    });
+                },
+                duration: 500
+            });
+            setProgressBar(--current);
         });
     });
 };

@@ -88,9 +88,10 @@
             .auth()
             .signInWithEmailAndPassword(email.value, password.value) // THIS LINE CHANGED
             .then((data) => {
-                console.log(data)
-                console.log('Successfully logged in!');
+                //console.log(data.user.multiFactor.user.email)
+                //console.log('Successfully logged in!');
                 localStorage.setItem('isLogged', 'true');
+                localStorage.setItem('emailLogged', data.user.multiFactor.user.email);
                 // redirect to the dashboard
                 router.push('/') 
             })

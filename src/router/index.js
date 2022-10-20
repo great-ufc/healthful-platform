@@ -1,13 +1,31 @@
 import { createRouter, createWebHistory } from "vue-router";
 const router = createRouter({
   history: createWebHistory(),
+  mode: 'history',
   routes: [
     {
+      name: "Home",
       path: "/",
       component: () => import("../views/Dashboard.vue"),
-      meta: {
-        requiresAuth: true
-      }
+      meta: { requiresAuth: true }
+    },
+    {
+      name: "ListLoops",
+      path: "/loops",
+      component: () => import("../views/loops/ListLoops.vue"),
+      meta: { requiresAuth: true }
+    },
+    {
+      name: "AddLoop",
+      path: "/loops/new",
+      component: () => import("../views/loops/AddLoop.vue"),
+      meta: { requiresAuth: true }
+    },
+    {
+      name: "EditLoop",
+      path: "/loops/edit/:id",
+      component: () => import("../views/loops/EditLoop.vue"),
+      meta: { requiresAuth: true }
     },
     {
       name: 'Login',
@@ -27,10 +45,10 @@ router.beforeEach((to, from, next) => {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
     var isLogged = localStorage.getItem('isLogged');
-    console.log(isLogged)
+    //console.log(isLogged)
 
     if (isLogged === null || isLogged == 'false') {
-      console.log('go to login')
+      //console.log('go to login')
       next({ name: 'Login' })
     } else {
       next() // go to wherever I'm going

@@ -20,7 +20,7 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-let gauthClientId = "202065532022-spvaf2r101ehghi71pt3e3ri6sibv3jq.apps.googleusercontent.com";
+let gauthClientId = "202065532022-8c628861eqi5evnee3vm6f1jga6t4a6k.apps.googleusercontent.com";
 
 const app = createApp(App)
 app.use(vue3GoogleLogin, {

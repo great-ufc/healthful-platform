@@ -60,6 +60,20 @@ NOTE: This file contains the styling for responsive Template.
 [ End table content ]
 ======================================*/
 
+.my-vr{
+  height: 100%;
+  display: inline-block;
+  align-self: stretch;
+  width: 1px;
+  min-height: 1em;
+  background-color: currentColor;
+  opacity: .25;
+}
+
+.previous, .next, .submit{
+  width: 85px;
+}
+
 /*--------------------------------------------------------------------
                             General
 ---------------------------------------------------------------------*/
@@ -360,7 +374,7 @@ div#lottie-beil svg path, div#lottie-mail svg path, div#lottie-fullscreen svg pa
 .iq-sidebar-logo a { display: flex; align-items: flex-start; }
 .iq-sidebar-logo a span { margin-left: 10px; font-size: 28px; line-height: 45px; color: #ffffff; font-family: 'Poppins', sans-serif; flex: 1; -webkit-transition: all 0.3s ease-out 0s; -moz-transition: all 0.3s ease-out 0s; -ms-transition: all 0.3s ease-out 0s; -o-transition: all 0.3s ease-out 0s; transition: all 0.3s ease-out 0s; }
 .iq-sidebar-logo a:hover, .iq-sidebar-logo a:focus { text-decoration: none; }
-.iq-sidebar-logo img { height: 45px; }
+.iq-sidebar-logo img { height: 70px; }
 .iq-top-navbar .iq-navbar-custom .iq-menu-bt-sidebar .iq-menu-bt { display: block; margin: 0 0 0 20px; }
 body.sidebar-main .iq-menu-bt-sidebar .iq-menu-bt { opacity: 1; }
 .iq-menu-bt { padding: 12px 7px; margin-right: 15px; -webkit-transition: all 0.3s ease-out 0s; -moz-transition: all 0.3s ease-out 0s; -ms-transition: all 0.3s ease-out 0s; -o-transition: all 0.3s ease-out 0s; transition: all 0.3s ease-out 0s; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 12px; }
@@ -893,17 +907,22 @@ Calender
 #top-tabbar-vertical .active { color: #089bab; }
 #top-tabbar-vertical li { list-style-type: none; font-size: 18px; width: 100%; float: left; position: relative; font-weight: 400 }
 #top-tabbar-vertical li i { display: inline-block; text-align: center; height: 50px; width: 50px; line-height: 50px; font-size: 20px; border-radius: 50%; margin: 0 20px 0 0; }
-#top-tabbar-vertical li#personal i { background: #eff7f8; color: #089bab; }
-#top-tabbar-vertical li#contact i { background: #fff5f4; color: #f14336; }
-#top-tabbar-vertical li#official i { background: #eefff2; color: #27b345; }
-#top-tabbar-vertical li#payment i { background: #fffcf3; color: #fbc647; }
+#top-tabbar-vertical li#monitor i { background: #eff7f8; color: #089bab; }
+#top-tabbar-vertical li#analyze i { background: #fff5f4; color: #f14336; }
+#top-tabbar-vertical li#plan i { background: #eefff2; color: #27b345; }
+#top-tabbar-vertical li#execute i { background: #fffcf3; color: #fbc647; }
+#top-tabbar-vertical li#gData i { background: #f1f2f1; color: #6c757d; }
+
 #top-tabbar-vertical li.active a { border-color: transparent; }
 #top-tabbar-vertical li a { background: #fff; color: #000; display: block; padding: 20px 15px; margin: 10px 20px; border-radius: 20px; -webkit-border-radius: 20px; text-decoration: none; border: 1px solid #f2edff; }
 #top-tabbar-vertical li.active i { background-color: #fff; color: #089bab; }
-#top-tabbar-vertical #personal.active a { background: #eff7f8; }
-#top-tabbar-vertical #contact.active a { background: #fff5f4; }
-#top-tabbar-vertical #official.active a { background: #eefff2; }
-#top-tabbar-vertical #payment.active a { background: #fffcf3; }
+
+#top-tabbar-vertical #gData.active a { background: #f1f2f1; }
+#top-tabbar-vertical #monitor.active a { background: #eff7f8; }
+#top-tabbar-vertical #analyze.active a { background: #fff5f4; }
+#top-tabbar-vertical #plan.active a { background: #eefff2; }
+#top-tabbar-vertical #execute.active a { background: #fffcf3; }
+
 #top-tabbar-vertical li.active i { background: #fff !important; }
 
 /*---------------------------------------------------------------------
