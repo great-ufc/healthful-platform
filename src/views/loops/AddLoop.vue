@@ -62,13 +62,8 @@
                                           </div>
                                           <div class="form-group">
                                               <label for="description">Description: *</label>
-                                              <textarea v-model="loopDescription" :class="validations.loopDescription ? 'is-invalid' : ''" class="form-control" id="description" name="description" placeholder="Add a description to explain how this loop works" rows="3"></textarea>
+                                              <textarea v-model="loopDescription" :class="validations.loopDescription ? 'is-invalid' : ''" class="form-control" id="description" name="description" placeholder="Add a description to explain how this loop works" rows="3" style="line-height: 30px;"></textarea>
                                               <div class="invalid-feedback" v-if="validations.loopDescription">{{validations.loopDescription}}</div>
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="notificationEmail">Email for notifications: *</label>
-                                            <input v-model="notificationEmail" :class="validations.notificationEmail ? 'is-invalid' : ''" type="email" class="form-control" id="notificationEmail" placeholder="Enter an Email">
-                                            <div class="invalid-feedback" v-if="validations.notificationEmail">{{validations.notificationEmail}}</div>
                                           </div>
                                           <div class="form-group">
                                               <label for="name">Unique Key: *</label>
@@ -99,12 +94,13 @@
                                           </div>
                                           <div class="form-group">
                                             <label for="sensors">Sensors:</label>
-                                            <select v-model="sensors" multiple="" class="form-control" id="sensors">
+                                            <select v-model="sensors" multiple="" class="form-control" id="sensors" style="min-height: 150px;">
                                                 <option>Pedometer</option>
+                                                <option>Heart Rate</option>
                                                 <option>Accelerometer</option>
+                                                <option>Sleep</option>
                                                 <option>GPS</option>
                                                 <option>Physical Activity</option>
-                                                <option>Heart Rate</option>
                                                 <option>Stress</option>
                                                 <option>Light</option>
                                                 <option>Gyroscope</option>
@@ -121,8 +117,9 @@
                                               <select v-model="questionnaire" :disabled="!questAsRef" class="form-control" id="questionnaire">
                                                 <option selected="" disabled="">Select your reference questionnaire</option>
                                                 <option>WHOQOL-BREF</option>
-                                                <option>SF-36</option>
                                                 <option>KIDSCREEN</option>
+                                                <option>SF-36</option>
+                                                <option>PHQ-9</option>
                                                 <option>Custom</option>
                                             </select>
                                           </div>
@@ -167,6 +164,7 @@
                                                 <option>QoL analysis</option>
                                                 <option>Gait analysis</option>
                                                 <option>Fall detection</option>
+                                                <option>Depression risk analysis</option>
                                               </select>
                                           </div>
                                         </div>
@@ -190,7 +188,7 @@
                                       <div class="col-md-5">
                                         <div class="form-group">
                                             <label for="contexts">Contexts: *</label>
-                                            <textarea v-model="contexts" :class="validations.contexts ? 'is-invalid' : ''" class="form-control" id="contexts" name="contexts" placeholder="Include risk contexts" rows="6"></textarea>
+                                            <textarea v-model="contexts" :class="validations.contexts ? 'is-invalid' : ''" class="form-control" id="contexts" name="contexts" placeholder="Include risk contexts" rows="6" style="line-height: 30px;"></textarea>
                                             <div class="invalid-feedback" v-if="validations.contexts">{{validations.contexts}}</div>
                                           </div>
                                       </div>
@@ -283,8 +281,6 @@
                                           <dd class="col-sm-9">{{loopName}}</dd>
                                           <dt class="col-sm-3">Description:</dt>
                                           <dd class="col-sm-9">{{loopDescription}}</dd>
-                                          <dt class="col-sm-3">E-mail:</dt>
-                                          <dd class="col-sm-9">{{notificationEmail}}</dd>
                                           <dt class="col-sm-3">Unique Key:</dt>
                                           <dd class="col-sm-9">{{uniqueKey}}</dd>
                                         </div>
@@ -384,9 +380,8 @@
     data: () => ({
       loopName: "",
       loopDescription: "",
-      notificationEmail: "",
       uniqueKey: "",
-      enableFirstStep: [false, false, false, false],
+      enableFirstStep: [false, false, false],
 
       dataCollectionFrequency: "Daily",
       sensors: [],
@@ -435,14 +430,10 @@
         this.loopDescription = value;
         this.validations['loopDescription'] = this.isEmptyValidation(this.loopDescription, this.enableFirstStep, 1);
       },
-      notificationEmail(value){
-        this.notificationEmail = value;
-        this.validations['notificationEmail'] = this.emailValidation(this.notificationEmail, this.enableFirstStep, 2);
-      },
       uniqueKey(value){
         this.uniqueKey = value ? value :  '';
         this.uniqueKey = this.uniqueKey.replace(new RegExp(' ', 'g'), '_').toLowerCase();
-        this.validations['uniqueKey'] = this.isEmptyValidation(this.uniqueKey, this.enableFirstStep, 3);
+        this.validations['uniqueKey'] = this.isEmptyValidation(this.uniqueKey, this.enableFirstStep, 2);
       },
       /* # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # */
       sensors(value){
@@ -541,7 +532,6 @@
         var loop = {
           loopName                : this.loopName,
           loopDescription         : this.loopDescription,
-          notificationEmail       : this.notificationEmail,
           uniqueKey               : this.uniqueKey,
           dataCollectionFrequency : this.dataCollectionFrequency,
           sensors                 : this.sensors,
